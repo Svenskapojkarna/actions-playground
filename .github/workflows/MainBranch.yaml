@@ -9,12 +9,19 @@ jobs:
   build:
     name: MainBranchActions
     runs-on: windows-latest
+    container:
+      image: rabbitmq:3.7-management
+      env:
+        RABBITMQ_DEFAULT_USER: agent
+        RABBITMQ_DEFAULT_PASS: agent123
+      ports:
+        - 9080:15672
+        - 5772:5672
+      options:
+        --hostname my-rabbit
     
     steps:
     - uses: actions/checkout@v1
     
-    - name: Switch Docker to Linux containers
-      run: \& $Env:ProgramFiles\\Docker\\Docker\\DockerCli.exe -SwitchDaemon
-    
-    - name: Start RabbitMQ container
-      run: docker run -d --hostname my-rabbit -p 9080:15672 -p 5772:5672 -e RABBITMQ_DEFAULT_USER=agent -e RABBITMQ_DEFAULT_PASS=agent123  rabbitmq:3.7-management
+    - name: Echo
+      run: echo toimii
