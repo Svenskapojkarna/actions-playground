@@ -3,11 +3,11 @@ name: MainBranch
 on:
   push:
     branches:    
-      - master
+      - main
 
 jobs:
   build:
-    name: ReleaseTheTask
+    name: MainBranchActions
     runs-on: windows-latest
     
     steps:
